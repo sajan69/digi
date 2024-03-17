@@ -1,0 +1,44 @@
+<!-- client_registration.html -->
+{% extends 'marketing_app/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h2 class="card-title text-center">Client Registration</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            {{ form.username }}
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            {{ form.email }}
+                        </div>
+                        <div class="form-group">
+                            <label for="password1">Password</label>
+                            {{ form.password1 }}
+                        </div>
+                        <div class="form-group">
+                            <label for="password2">Confirm Password</label>
+                            {{ form.password2 }}
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            {{ form.phone }}
+                        </div>
+                        <div class="form-group">
+                            <label for="marketing_preferences">Marketing Preferences</label>
+                            {{ form.marketing_preferences }}
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

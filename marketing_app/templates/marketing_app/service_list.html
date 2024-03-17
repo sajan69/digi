@@ -1,0 +1,68 @@
+{% extends 'marketing_app/base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1>Services</h1>
+    <div class="row">
+      {% for service in services %}
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ service.name }}</h5>
+              <p class="card-text">{{ service.description }}</p>
+              <a href="{% url 'marketing_app:service_detail' service.id %}" class="btn btn-primary">View Details</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      {% if user.is_superuser %}
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Add New Service</h5>
+            
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addServiceModal">
+              Add Service
+            </button>
+
+            
+            <div class="modal fade" id="addServiceModal" tabindex="-1" aria-labelledby="addServiceModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="addServiceModalLabel">Add New Service</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form method="post" action="{% url 'marketing_app:add_service' %}">
+                      {% csrf_token %}
+                      <div class="mb-3">
+                        <label for="service_name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="service_name" name="service_name">
+                      </div>
+                      <div class="mb-3">
+                        <label for="service_description" class="form-label">Description</label>
+                        <textarea class="form-control" id="service_description" name="service_description" rows="3"></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="service_objectives" class="form-label">Objectives</label>
+                        <textarea class="form-control" id="service_objectives" name="service_objectives" rows="3"></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="service_timeline" class="form-label">Timeline</label>
+                        <input type="text" class="form-control" id="service_timeline" name="service_timeline">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Add Service</button>
+                    </form>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

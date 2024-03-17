@@ -1,0 +1,45 @@
+{% extends 'marketing_app/base.html' %}
+
+{% block content %}
+
+<h1>Service Usage Analytics</h1>
+<canvas id="serviceChart" width="300" height="150"></canvas> <!-- Adjusted width and height -->
+
+<script>
+    var serviceNames = {{ service_names|safe }};
+    var bookingCounts = {{ booking_counts|safe }};
+    var clientsPerService = {{ clients_per_service|safe }};
+  
+    var ctx = document.getElementById('serviceChart').getContext('2d');
+    var serviceChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: serviceNames,
+        datasets: [
+          {
+            label: 'Number of Bookings',
+            data: bookingCounts,
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+          },
+          {
+            label: 'Number of Clients',
+            data: clientsPerService,
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+</script>
+
+{% endblock %}

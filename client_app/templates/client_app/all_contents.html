@@ -1,0 +1,37 @@
+{% extends 'marketing_app/base.html' %}
+
+{% block content %}
+
+<h1>All Contents</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Publication Date</th>
+            <th>Action</th> <!-- Add a new column for action -->
+        </tr>
+    </thead>
+    <tbody>
+        {% for content in contents %}
+            <tr>
+                <td>{{ content.content_type }}</td>
+                <td>{{ content.status }}</td>
+                <td>{{ content.publication_date }}</td>
+                <td>
+                    <form method="post" action="{% url 'client_app:change_content_status' content.id %}">
+                        {% csrf_token %}
+                        <select name="status">
+                            <option value="draft" {% if content.status == 'draft' %} selected {% endif %}>Draft</option>
+                            <option value="reviewed" {% if content.status == 'reviewed' %} selected {% endif %}>Reviewed</option>
+                            <option value="approved" {% if content.status == 'approved' %} selected {% endif %}>Approved</option>
+                        </select>
+                        <button type="submit">Change Status</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

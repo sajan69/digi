@@ -1,0 +1,14 @@
+{% extends 'marketing_app/base.html' %}
+
+{% block content %}
+  <h1>Your Content</h1>
+  <a href="{% url 'marketing_app:content_create' %}">Create New Content</a>
+  <ul>
+    {% for content in contents %}
+      <li>
+        <a href="{% url 'marketing_app:content_detail' content.id %}">{{ content }}</a>
+        (Status: {{ content.status }})
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

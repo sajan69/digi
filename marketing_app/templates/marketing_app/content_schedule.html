@@ -1,0 +1,13 @@
+{% extends 'marketing_app/base.html' %}
+
+{% block content %}
+  <h1>Schedule Content</h1>
+  <p>{{ content.content_type }}</p>
+  <p>{{ content.content_body }}</p>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Schedule</button>
+  </form>
+{% endblock %}

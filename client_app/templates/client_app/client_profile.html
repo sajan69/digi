@@ -1,0 +1,13 @@
+{% extends 'marketing_app/base.html' %}
+
+{% block content %}
+  <h1>User Profile</h1>
+  <p>Username: {{ user.username }}</p>
+  <p>Email: {{ user.email }}</p>
+
+  {% if client %}
+    <h2>Client Profile</h2>
+    <p>Phone Number: {{ client.phone }}</p>
+    <p>Marketing Preferences: {{ client.marketing_preferences }}</p>
+  {% endif %}
+{% endblock %}

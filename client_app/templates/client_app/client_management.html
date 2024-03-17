@@ -1,0 +1,31 @@
+{% extends 'marketing_app/base.html' %}
+
+{% block content %}
+  <h1>Client Management</h1>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Marketing Preferences</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for client in clients %}
+        <tr>
+          <td>{{ client.user.username }}</td>
+          <td>{{ client.user.email }}</td>
+          <td>{{ client.phone }}</td>
+          <td>{{ client.marketing_preferences }}</td>
+          <td>
+            <a href="{% url 'client_app:client_update' client.id %}" class="btn btn-sm btn-primary">Edit</a>
+            <a href="{% url 'client_app:client_delete' client.id %}" class="btn btn-sm btn-danger">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

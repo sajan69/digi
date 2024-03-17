@@ -1,0 +1,26 @@
+{% extends 'marketing_app/base.html' %}
+
+{% block content %}
+<h1>All Bookings</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Service</th>
+            <th>User</th>
+            <th>Booking Date</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.service.name }}</td>
+                <td>{{ booking.user.username }}</td>
+                <td>{{ booking.booking_date }}</td>
+                
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'marketing_app/base.html' %}
+
+{% block content %}
+{% if messages %}
+                    {% for message in messages %}
+                    <div class="mt-4 alert alert-{% if message.tags == 'error' %}danger{% else %}{{message.tags}}{% endif %}
+                        alert-dismissible" role="alert">
+                        <div id="form_errors">
+                            <strong>{{message}}</strong>
+                        </div>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+  <h1>{{ service.name }}</h1>
+  <p>{{ service.description }}</p>
+  <p>Objectives: {{ service.objectives }}</p>
+  <p>Timeline: {{ service.timeline }}</p>
+
+ {% if user.is_authenticated %}
+ {% if request.user.is_superuser %}
+        
+        <h2>Update Service</h2>
+        <form method="post">
+          {% csrf_token %}
+          {{ update_form.as_p }}
+          <button type="submit">Update</button>
+        </form>
+      {% endif %}
+ <h2>Book Service</h2>
+ <form method="post">
+   {% csrf_token %}
+   <label for="id_customer_name">Your Name:</label>
+   {{ form.customer_name }}
+   <label for="id_email">Email:</label>
+   {{ form.email }}
+   <label for="id_phone_number">Phone Number:</label>
+   {{ form.phone_number }}
+   
+   <button type="submit">Book Now</button>
+ </form>
+  {% endif %}
+{% endblock %}
